@@ -32,8 +32,9 @@ namespace
     }
     }
     MainWindow* theWindow = reinterpret_cast<MainWindow*>(GetWindowLongPtrW(window_handler, GWLP_USERDATA));
-    if (theWindow)
+    if (theWindow) {
       return theWindow->Trigger(msg, w_param, l_param);
+    }
     return DefWindowProc(window_handler, msg, w_param, l_param);
   }
 
@@ -100,6 +101,7 @@ MainWindow::MainWindow(const DomString& window_name)
 MainWindow::~MainWindow() {
   if (IsWindow(window_handler_)) {
     DestroyWindow(window_handler_);
+    window_handler_ = 0;
   }
 }
 
@@ -111,7 +113,17 @@ void MainWindow::Show(int show_flags)
 
 LRESULT MainWindow::Trigger(UINT msg, WPARAM w_param, LPARAM l_param)
 {
-  
+  previous_message_ = last_message_;
+  last_message_.hwnd = window_handler_;
+  last_message_.lParam = l_param;
+  last_message_.wParam = w_param;
+  last_message_.message = msg;
+  last_message_.time = GetTickCount();
+  unordered_map<UINT, boost::signals2::signal<LRESULT(LPARAM, WPARAM)>>::const_iterator signal_finder = handlers_.find(msg);
+  if (signal_finder != handlers_.end()) {
+    signal_finder->second(l_param, w_param);
+    return 0;
+  }
   return DefWindowProc(window_handler_, msg, w_param, l_param);
 }
 
