@@ -1,3 +1,4 @@
 [submodule "third_party/tinysvg"]
 	path = third_party/tinysvg
 	url = https://github.com/McMurphy-Luo/tinysvg.git
+  branch = master
