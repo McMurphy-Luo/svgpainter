@@ -83,14 +83,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Loader.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainWindow.cpp" />
     <ClCompile Include="src\Painter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
-    <ClInclude Include="src\Loader.h" />
     <ClInclude Include="src\MainWindow.h" />
     <ClInclude Include="src\Painter.h" />
   </ItemGroup>
