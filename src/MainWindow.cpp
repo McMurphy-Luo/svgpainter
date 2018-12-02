@@ -91,10 +91,6 @@ MainWindow::MainWindow(const DomString& window_name)
     GetModuleHandle(NULL),
     this
   );
-  int error_code = GetLastError();
-  TCHAR buffer[1024];
-  _itot_s(error_code, buffer, 1024, 10);
-  OutputDebugString(buffer);
   assert(IsWindow(window_handler_));
 }
 

@@ -22,8 +22,9 @@ private:
   CComPtr<IDXGIFactory> dxgi_factory_;
   CComPtr<IDXGIAdapter> dxgi_adapter_;
   CComPtr<IDXGIOutput> dxgi_output_;
-  CComPtr<IDXGISwapChain> swap_chain_;
   CComPtr<ID3D11Device> d3d_device_;
+  CComPtr<ID3D11DeviceContext> d3d_device_context_;
+  CComPtr<IDXGISwapChain> swap_chain_;
   CComPtr<ID2D1RenderTarget> render_target_;
 };
 
